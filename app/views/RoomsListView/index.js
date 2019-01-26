@@ -7,6 +7,7 @@ import { connect, Provider } from 'react-redux';
 import { isEqual } from 'lodash';
 import { Navigation } from 'react-native-navigation';
 
+import { serverRequest } from '../../actions/server'
 import SearchBox from '../../containers/SearchBox';
 import ConnectionBadge from '../../containers/ConnectionBadge';
 import database from '../../lib/realm';
