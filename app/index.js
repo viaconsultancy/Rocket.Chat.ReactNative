@@ -66,7 +66,7 @@ iconsLoaded();
 export default class App extends Component {
 	constructor(props) {
 		super(props);
-		const { connectServer } = this.props;
+		const { connectServer } = props;
         connectServer(this.completeUrl('https://open.rocket.chat'));
 		store.dispatch(appInit());
 		store.subscribe(this.onStoreUpdate.bind(this));
