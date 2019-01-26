@@ -73,15 +73,14 @@ export default class App extends Component {
 	onStoreUpdate = () => {
 		const { root } = store.getState().app;
 
-		startLogged();
-		// if (this.currentRoot !== root) {
-		// 	this.currentRoot = root;
-		// 	if (root === 'outside') {
-		// 		startNotLogged();
-		// 	} else if (root === 'inside') {
-		// 		startLogged();
-		// 	}
-		// }
+		if (this.currentRoot !== root) {
+			this.currentRoot = root;
+			// if (root === 'outside') {
+			// 	startNotLogged();
+			// } else if (root === 'inside') {
+			startLogged();
+			// }
+		}
 	}
 
 	setDeviceToken(deviceToken) {
