@@ -7,7 +7,7 @@ import { connect, Provider } from 'react-redux';
 import { isEqual } from 'lodash';
 import { Navigation } from 'react-native-navigation';
 
-import { serverRequest } from '../../actions/server'
+import { selectServerRequest } from '../../actions/server'
 import SearchBox from '../../containers/SearchBox';
 import ConnectionBadge from '../../containers/ConnectionBadge';
 import database from '../../lib/realm';
@@ -65,7 +65,7 @@ let NewMessageView = null;
 	useRealName: state.settings.UI_Use_Real_Name
 }), dispatch => ({
 	toggleSortDropdown: () => dispatch(toggleSortDropdownAction()),
-	connectServer: server => dispatch(serverRequest(server))
+	connectServer: server => dispatch(selectServerRequest(server))
 }))
 /** @extends React.Component */
 export default class RoomsListView extends LoggedView {
