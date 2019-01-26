@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { Linking } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 
+import { selectServerRequest } from '../../actions/server'
 import store from './lib/createStore';
 import { appInit } from './actions';
 import { iconsLoaded } from './Icons';
@@ -56,9 +57,17 @@ const handleOpenURL = ({ url }) => {
 registerScreens(store);
 iconsLoaded();
 
+@connect(state => ({
+	
+}), dispatch => ({
+	connectServer: server => dispatch(selectServerRequest(server))
+}))
+/** @extends React.Component */
 export default class App extends Component {
 	constructor(props) {
 		super(props);
+		const { connectServer } = this.props;
+        connectServer(this.completeUrl('https://open.rocket.chat'));
 		store.dispatch(appInit());
 		store.subscribe(this.onStoreUpdate.bind(this));
 		initializePushNotifications();
@@ -85,5 +94,24 @@ export default class App extends Component {
 
 	setDeviceToken(deviceToken) {
 		this.deviceToken = deviceToken;
+	}
+
+	completeUrl = (url) => {
+		url = url && url.trim();
+
+		if (/^(\w|[0-9-_]){3,}$/.test(url)
+			&& /^(htt(ps?)?)|(loca((l)?|(lh)?|(lho)?|(lhos)?|(lhost:?\d*)?)$)/.test(url) === false) {
+			url = `${ url }.rocket.chat`;
+		}
+
+		if (/^(https?:\/\/)?(((\w|[0-9])+(\.(\w|[0-9-_])+)+)|localhost)(:\d+)?$/.test(url)) {
+			if (/^localhost(:\d+)?/.test(url)) {
+				url = `http://${ url }`;
+			} else if (/^https?:\/\//.test(url) === false) {
+				url = `https://${ url }`;
+			}
+		}
+
+		return url.replace(/\/+$/, '');
 	}
 }

@@ -65,7 +65,7 @@ let NewMessageView = null;
 	useRealName: state.settings.UI_Use_Real_Name
 }), dispatch => ({
 	toggleSortDropdown: () => dispatch(toggleSortDropdownAction()),
-	connectServer: server => dispatch(selectServerRequest(server))
+	// connectServer: server => dispatch(selectServerRequest(server))
 }))
 /** @extends React.Component */
 export default class RoomsListView extends LoggedView {
@@ -117,28 +117,9 @@ export default class RoomsListView extends LoggedView {
 	}
 
 	componentWillMount() {
-		const { connectServer } = this.props;
-        connectServer(this.completeUrl('https://open.rocket.chat'));
+		// const { connectServer } = this.props;
+        // connectServer(this.completeUrl('https://open.rocket.chat'));
 		this.initDefaultHeader();
-	}
-
-	completeUrl = (url) => {
-		url = url && url.trim();
-
-		if (/^(\w|[0-9-_]){3,}$/.test(url)
-			&& /^(htt(ps?)?)|(loca((l)?|(lh)?|(lho)?|(lhos)?|(lhost:?\d*)?)$)/.test(url) === false) {
-			url = `${ url }.rocket.chat`;
-		}
-
-		if (/^(https?:\/\/)?(((\w|[0-9])+(\.(\w|[0-9-_])+)+)|localhost)(:\d+)?$/.test(url)) {
-			if (/^localhost(:\d+)?/.test(url)) {
-				url = `http://${ url }`;
-			} else if (/^https?:\/\//.test(url) === false) {
-				url = `https://${ url }`;
-			}
-		}
-
-		return url.replace(/\/+$/, '');
 	}
 
 	componentDidMount() {
