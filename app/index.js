@@ -56,19 +56,10 @@ const handleOpenURL = ({ url }) => {
 registerScreens(store);
 iconsLoaded();
 
-@connect(state => ({
-	// connecting: state.server.connecting,
-	// failure: state.server.failure
-}), dispatch => ({
-	connectServer: server => dispatch(serverRequest(server))
-}))
-/** @extends React.Component */
 export default class App extends Component {
 	constructor(props) {
         super(props);
 		store.dispatch(appInit());
-        // const { connectServer } = props;
-        // connectServer(this.completeUrl('https://open.rocket.chat'));
 		store.subscribe(this.onStoreUpdate.bind(this));
 		initializePushNotifications();
 
@@ -82,36 +73,19 @@ export default class App extends Component {
 	onStoreUpdate = () => {
 		const { root } = store.getState().app;
 
-		if (this.currentRoot !== root) {
-			this.currentRoot = root;
-			if (root === 'outside') {
-				startNotLogged();
-			} else if (root === 'inside') {
-				startLogged();
-			}
-		}
+		startLogged();
+		// if (this.currentRoot !== root) {
+		// 	this.currentRoot = root;
+		// 	if (root === 'outside') {
+		// 		startNotLogged();
+		// 	} else if (root === 'inside') {
+		// 		startLogged();
+		// 	}
+		// }
 	}
 
 	setDeviceToken(deviceToken) {
 		this.deviceToken = deviceToken;
     }
     
-    completeUrl = (url) => {
-		url = url && url.trim();
-
-		if (/^(\w|[0-9-_]){3,}$/.test(url)
-			&& /^(htt(ps?)?)|(loca((l)?|(lh)?|(lho)?|(lhos)?|(lhost:?\d*)?)$)/.test(url) === false) {
-			url = `${ url }.rocket.chat`;
-		}
-
-		if (/^(https?:\/\/)?(((\w|[0-9])+(\.(\w|[0-9-_])+)+)|localhost)(:\d+)?$/.test(url)) {
-			if (/^localhost(:\d+)?/.test(url)) {
-				url = `http://${ url }`;
-			} else if (/^https?:\/\//.test(url) === false) {
-				url = `https://${ url }`;
-			}
-		}
-
-		return url.replace(/\/+$/, '');
-	}
 }
