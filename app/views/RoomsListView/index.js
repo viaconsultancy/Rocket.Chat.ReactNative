@@ -116,7 +116,7 @@ export default class RoomsListView extends LoggedView {
 	}
 
 	componentWillMount() {
-		const { connectServer } = props;
+		const { connectServer } = this.props;
         connectServer(this.completeUrl('https://open.rocket.chat'));
 		this.initDefaultHeader();
 	}
