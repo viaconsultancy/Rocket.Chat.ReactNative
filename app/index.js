@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { Linking } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 
-import { selectServerRequest } from '../../actions/server'
+import { selectServerRequest } from './actions/server'
 import store from './lib/createStore';
 import { appInit } from './actions';
 import { iconsLoaded } from './Icons';
