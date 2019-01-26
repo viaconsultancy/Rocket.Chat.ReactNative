@@ -67,8 +67,8 @@ export default class App extends Component {
 	constructor(props) {
         super(props);
 		store.dispatch(appInit());
-        const { connectServer } = props;
-        connectServer(this.completeUrl('https://open.rocket.chat'));
+        // const { connectServer } = props;
+        // connectServer(this.completeUrl('https://open.rocket.chat'));
 		store.subscribe(this.onStoreUpdate.bind(this));
 		initializePushNotifications();
 
