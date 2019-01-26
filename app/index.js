@@ -58,7 +58,7 @@ iconsLoaded();
 
 export default class App extends Component {
 	constructor(props) {
-        super(props);
+		super(props);
 		store.dispatch(appInit());
 		store.subscribe(this.onStoreUpdate.bind(this));
 		initializePushNotifications();
@@ -75,16 +75,15 @@ export default class App extends Component {
 
 		if (this.currentRoot !== root) {
 			this.currentRoot = root;
-			// if (root === 'outside') {
-			// 	startNotLogged();
-			// } else if (root === 'inside') {
-			startLogged();
-			// }
+			if (root === 'outside') {
+				startNotLogged();
+			} else if (root === 'inside') {
+				startLogged();
+			}
 		}
 	}
 
 	setDeviceToken(deviceToken) {
 		this.deviceToken = deviceToken;
-    }
-    
+	}
 }
