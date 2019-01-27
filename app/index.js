@@ -66,8 +66,6 @@ iconsLoaded();
 export default class App extends Component {
 	constructor(props) {
 		super(props);
-		const { connectServer } = props;
-        connectServer(this.completeUrl('https://open.rocket.chat'));
 		store.dispatch(appInit());
 		store.subscribe(this.onStoreUpdate.bind(this));
 		initializePushNotifications();
@@ -113,5 +111,10 @@ export default class App extends Component {
 		}
 
 		return url.replace(/\/+$/, '');
+	}
+
+	componentWillMount() {
+		const { connectServer } = this.props;
+        connectServer(this.completeUrl('https://open.rocket.chat'));
 	}
 }
