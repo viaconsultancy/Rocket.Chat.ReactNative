@@ -57,9 +57,7 @@ const handleOpenURL = ({ url }) => {
 registerScreens(store);
 iconsLoaded();
 
-@connect(state => ({
-	
-}), dispatch => ({
+@connect(state => state, dispatch => ({
 	connectServer: server => dispatch(selectServerRequest(server))
 }))
 /** @extends React.Component */
@@ -114,7 +112,7 @@ export default class App extends Component {
 	}
 
 	componentWillMount() {
-		const { connectServer } = this.props;
-        connectServer(this.completeUrl('https://open.rocket.chat'));
+		// const { connectServer } = this.props;
+        // connectServer(this.completeUrl('https://open.rocket.chat'));
 	}
 }
