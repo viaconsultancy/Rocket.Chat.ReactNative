@@ -7,7 +7,6 @@ import { connect, Provider } from 'react-redux';
 import { isEqual } from 'lodash';
 import { Navigation } from 'react-native-navigation';
 
-import { selectServerRequest } from '../../actions/server'
 import SearchBox from '../../containers/SearchBox';
 import ConnectionBadge from '../../containers/ConnectionBadge';
 import database from '../../lib/realm';
@@ -64,8 +63,7 @@ let NewMessageView = null;
 	showUnread: state.sortPreferences.showUnread,
 	useRealName: state.settings.UI_Use_Real_Name
 }), dispatch => ({
-	toggleSortDropdown: () => dispatch(toggleSortDropdownAction()),
-	// connectServer: server => dispatch(selectServerRequest(server))
+	toggleSortDropdown: () => dispatch(toggleSortDropdownAction())
 }))
 /** @extends React.Component */
 export default class RoomsListView extends LoggedView {
@@ -117,8 +115,6 @@ export default class RoomsListView extends LoggedView {
 	}
 
 	componentWillMount() {
-		// const { connectServer } = this.props;
-        // connectServer(this.completeUrl('https://open.rocket.chat'));
 		this.initDefaultHeader();
 	}
 
